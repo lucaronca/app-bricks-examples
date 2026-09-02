@@ -12,7 +12,7 @@ This App turns the `pose_estimation` Brick into an interactive game. The Brick a
 
 - Real-time skeleton overlay and bounding box, drawn by the model runner and streamed as MJPEG.
 - Stable pose events: per-frame classifications are smoothed over time, so a card only lights up when you actually hold the pose.
-- A "Move back" hint when your whole body does not fit in the picture.
+- A "Get in the picture" hint when your whole body is not present, or is only partially present, in the picture.
 - A badge when more than one person is in view, with a one-off note that the biggest figure is the one being tracked.
 - Sound effects on game start, on every pose found and on victory.
 
@@ -43,7 +43,7 @@ This App turns the `pose_estimation` Brick into an interactive game. The Brick a
 
 3. **Get in position**
 
-   Stand where your whole body fits in the picture. If you are too close, the game shows "Move back".
+   Stand where your whole body fits in the picture. If no one is present, or you are too close, the game shows "Get in the picture".
 
 4. **Play**
 
@@ -86,7 +86,7 @@ Pose events go straight to the page. Two more signals travel with them: `on_read
 
 ### 💻 Frontend (index.html + app.js)
 
-The page embeds the runner's MJPEG stream in an `<img>` and keeps all the game state in the browser: a single `data-state` attribute (`loading`, `start`, `playing`, `win-pending`, `win`) drives what is visible via CSS. Pose `enter` events flip each card to its found state; when all four are found the win screen appears after a short pause. The "Move back" overlay follows the Brick's readability signal directly, which is already debounced, so the page keeps no timers of its own.
+The page embeds the runner's MJPEG stream in an `<img>` and keeps all the game state in the browser: a single `data-state` attribute (`loading`, `start`, `playing`, `win-pending`, `win`) drives what is visible via CSS. Pose `enter` events flip each card to its found state; when all four are found the win screen appears after a short pause. The "Get in the picture" overlay follows the Brick's readability signal directly, which is already debounced, so the page keeps no timers of its own.
 
 ### 🛠️ Customizing the Game
 
